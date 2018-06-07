@@ -6,6 +6,7 @@ import seaborn as sb
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
+from sklearn.datasets import fetch_mldata
 
 # load data set Iris
 url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
@@ -13,7 +14,7 @@ url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
 # load data set into Pandas DataFrame
 df = pd.read_csv(url, names=['sepal length', 'sepal width', 'petal length', 'petal width', 'target'])
 
-# print df
+
 
 # ------------------------------------- Padronize os dados --------------------------------------------
 
@@ -22,6 +23,8 @@ features = ['sepal length', 'sepal width', 'petal length', 'petal width']
 
 # Separando os recursos
 x = df.loc[:, features].values
+
+print x
 
 # Padronizando os recursos
 x = StandardScaler().fit_transform(x)
@@ -74,7 +77,30 @@ ax.legend(targets)
 ax.grid()
 
 
+
+
+
+
+# outros graficos
+
+
+pca.explained_variance_ratio_
+mnist = fetch_mldata('MNIST original')
+
+from sklearn.model_selection import train_test_split
+
+# test_size: what proportion of original data is used for test set
+train_img, test_img, train_lbl, test_lbl = train_test_split(mnist.data, mnist.target, test_size=1/7.0, random_state=0)
+
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+
+# Fit on training set only.
+scaler.fit(train_img)
+
+# Apply transform to both the training set and the test set.
+train_img = scaler.transform(train_img)
+test_img = scaler.transform(test_img)
+
+
 plt.show()
-
-
-
